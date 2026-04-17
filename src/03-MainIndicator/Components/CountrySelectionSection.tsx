@@ -14,7 +14,7 @@ export const CountrySelectionSection = ({
 }) => {
   return (
     <div
-      className={`flex items-center w-full bg-cover bg-center bg-no-repeat bg-[url('/imgs/sphere.webp')] px-20 min-h-[calc(100vh-120px)]`}
+      className={`flex items-center w-full bg-cover bg-center bg-no-repeat bg-[url('/imgs/sphere.webp')] px-4 lg:px-20 min-h-0 lg:min-h-[calc(100vh-120px)] py-12 lg:py-0`}
     >
       {loading ? (
         <Spinner />

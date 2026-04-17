@@ -1,5 +1,76 @@
 import { cn } from '@undp/design-system-react/cn';
 
+/** Base URL for Anti-Corruption API */
+export const API_BASE_URL = 'https://app.anti-corruption.org/api';
+
+/**
+ * Page size for Facts API. Large values increase payload size and load time.
+ * Homepage uses getAllCountriesAllData (no filters) → largest response.
+ * Reduce if backend supports pagination (e.g. pageNumber) or a summary endpoint.
+ */
+export const FACTS_API_PAGE_SIZE = 10000;
+
+/** Smaller page size for heavily filtered Facts (e.g. regional) where result set is small */
+export const FACTS_API_PAGE_SIZE_SMALL = 1000;
+
+const isDev =
+  typeof import.meta !== 'undefined' &&
+  (import.meta as unknown as { env?: { DEV?: boolean } }).env?.DEV === true;
+
+const perfNow =
+  typeof performance !== 'undefined' && typeof performance.now === 'function'
+    ? () => performance.now()
+    : () => Date.now();
+
+/** Log duration for Indicators / Countries metadata fetches in development. */
+export function logGlobalApiTiming(label: string, durationMs: number): void {
+  if (!isDev) return;
+  console.warn(`[Global API] ${label}: ${durationMs.toFixed(0)}ms`);
+}
+
+export function logGlobalApiTimingStart(): number {
+  return perfNow();
+}
+
+export function logGlobalApiTimingEnd(label: string, start: number): void {
+  logGlobalApiTiming(label, perfNow() - start);
+}
+
+/** Log Facts API response size in development to diagnose slow loading */
+export function logFactsPayloadSize(label: string, data: unknown): void {
+  if (isDev && Array.isArray(data)) {
+    const bytes = new Blob([JSON.stringify(data)]).size;
+    const mb = (bytes / 1024 / 1024).toFixed(2);
+    console.warn(`[Facts API] ${label}: ${data.length} items, ~${mb} MB`);
+  }
+}
+
+/** Log start time for a Facts API request in development. Returns a token for logFactsLoadEnd. */
+export function logFactsLoadStart(label: string): number | null {
+  if (!isDev) return null;
+  const start =
+    typeof performance !== 'undefined' && typeof performance.now === 'function'
+      ? performance.now()
+      : Date.now();
+  console.warn(`[Facts API] START ${label} at ${new Date().toISOString()}`);
+  return start;
+}
+
+/** Log end time and duration for a Facts API request in development. */
+export function logFactsLoadEnd(label: string, start: number | null): void {
+  if (!isDev || start == null) return;
+  const end =
+    typeof performance !== 'undefined' && typeof performance.now === 'function'
+      ? performance.now()
+      : Date.now();
+  const durationMs = end - start;
+  console.warn(
+    `[Facts API] END ${label} at ${new Date().toISOString()} (+${durationMs.toFixed(
+      0,
+    )} ms)`,
+  );
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const DROPDOWN_CLASSNAMES: any = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

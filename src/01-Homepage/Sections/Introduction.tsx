@@ -2,11 +2,13 @@ import { ThreeDGlobe } from '@undp/data-viz/ThreeDGlobe';
 import * as THREE from 'three';
 import { ArrowDown } from 'lucide-react';
 import { useEffect, useRef, useState, useEffectEvent, RefObject } from 'react';
+import { Spinner } from '@undp/design-system-react/Spinner';
 
 import { IndicatorsMetaDataType } from '@/Types';
 import { ScrollToObj } from '@/Utils/ScrollToObj';
 import { HeadingText, ParagraphText } from '@/Components/Typography';
 import { Button } from '@/Components/Button';
+import { useIsMobileBreakpoint } from '@/Utils/useIsMobileBreakpoint';
 
 interface Props {
   data: { id: string; x: string }[];
@@ -24,6 +26,7 @@ const Introduction = (props: Props) => {
     indicatorsMetaData,
     globeControlsRef,
   } = props;
+  const isMobile = useIsMobileBreakpoint();
   const [globeYOffSet, setGlobeYOffSet] = useState(0);
   const globeDiv = useRef<HTMLDivElement>(null);
   const setOffset = useEffectEvent(() => {
@@ -53,11 +56,12 @@ const Introduction = (props: Props) => {
             evidence-based reforms across all dimensions of anti-corruption
             efforts.
           </ParagraphText>
-          <div className='flex gap-x-10 gap-y-4 flex-wrap'>
+          <div className='flex flex-col lg:flex-row gap-x-4 lg:gap-x-10 gap-y-4 flex-wrap justify-center items-center w-full lg:w-auto px-4 lg:px-0'>
             {indicatorsMetaData.map((d, i) => (
               <Button
                 key={i}
                 variant='primary'
+                className='w-full lg:w-auto text-center'
                 onClick={() => {
                   ScrollToObj(globeControlsRef.current[i]);
                 }}
@@ -67,6 +71,7 @@ const Introduction = (props: Props) => {
             ))}
             <Button
               variant='primary'
+              className='w-full lg:w-auto text-center'
               onClick={() => {
                 ScrollToObj(countryLevelInsightsRef.current);
               }}
@@ -87,7 +92,7 @@ const Introduction = (props: Props) => {
               polygonAltitude={0.005}
               colors={['#A5B3C5', '#4A7591']}
               colorDomain={['No', 'Yes']}
-              scale={0.72}
+              scale={isMobile ? 0.8 : 0.72}
               footNote=''
               globeMaterial={
                 new THREE.MeshBasicMaterial({
@@ -101,11 +106,16 @@ const Introduction = (props: Props) => {
               autoRotate={1}
               data={data}
             />
-          ) : null}
+          ) : (
+            <div className='flex flex-col items-center justify-center w-full gap-3 opacity-60'>
+              <Spinner size='lg' />
+              <ParagraphText size='sm'>Loading globe...</ParagraphText>
+            </div>
+          )}
         </div>
       </div>
       <button
-        className='cursor-pointer border-0 fixed bottom-6 left-[50%] translate-x-[-50%] rounded-full bg-primary-white w-[40px] h-[40px] flex justify-center items-center'
+        className='cursor-pointer border-0 hidden lg:flex fixed bottom-6 left-[50%] translate-x-[-50%] rounded-full bg-primary-white w-[40px] h-[40px] justify-center items-center'
         onClick={() => {
           ScrollToObj(pillarVisualizationRef.current);
         }}

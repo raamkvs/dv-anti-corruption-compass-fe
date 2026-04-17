@@ -1,21 +1,46 @@
 import { Spinner } from '@undp/design-system-react';
 import { useQuery } from '@tanstack/react-query';
+import { useMemo } from 'react';
 
 import Viz from './Viz';
 
-import { CountriesDataType, DataType, IndicatorsMetaDataType } from '@/Types';
-import { getCountryData } from '@/QueryFn/getCountryData';
+import { CountriesDataType, IndicatorsMetaDataType } from '@/Types';
 import { ErrorState } from '@/Components/ErrorState';
+import {
+  getCountryIndicatorDashboard,
+  CountryIndicatorDashboardResponse,
+} from '@/QueryFn/getCountryIndicatorDashboard';
+import staticDashboard2 from '@/static/cache/countryDashboard_2.json';
+import staticDashboard1 from '@/static/cache/countryDashboard_1.json';
 
-function useDataForCountry(countryCode: string, mainIndicatorId: number) {
+const dashboardCaches: Record<
+  number,
+  Record<string, CountryIndicatorDashboardResponse>
+> = {
+  1: staticDashboard1 as unknown as Record<
+    string,
+    CountryIndicatorDashboardResponse
+  >,
+  2: staticDashboard2 as unknown as Record<
+    string,
+    CountryIndicatorDashboardResponse
+  >,
+};
+
+function useDashboardForCountry(
+  countryCode: string,
+  mainIndicatorId: number,
+) {
+  const seeded = useMemo(() => {
+    const cache = dashboardCaches[mainIndicatorId];
+    return cache?.[countryCode] ?? undefined;
+  }, [countryCode, mainIndicatorId]);
+
   return useQuery({
-    queryKey: ['indicator-data', countryCode, mainIndicatorId],
-    queryFn: () => getCountryData(countryCode, mainIndicatorId),
-    select: data =>
-      data.map((d: DataType) => ({
-        ...d,
-        id: `${d.mainIndicatorId}_${d.subIndicatorId}`,
-      })),
+    queryKey: ['countryIndicatorDashboard', countryCode, mainIndicatorId],
+    queryFn: () => getCountryIndicatorDashboard(countryCode, mainIndicatorId),
+    initialData: seeded,
+    initialDataUpdatedAt: 0,
   });
 }
 
@@ -26,7 +51,7 @@ interface Props {
 }
 
 function DefaultViz({ countryInfo, indicatorMetaData, suffix }: Props) {
-  const { data, isLoading, isError } = useDataForCountry(
+  const { data, isLoading, isError } = useDashboardForCountry(
     countryInfo['Alpha-3 code'],
     indicatorMetaData.mainIndicatorId,
   );
@@ -45,7 +70,11 @@ function DefaultViz({ countryInfo, indicatorMetaData, suffix }: Props) {
     );
   if (data)
     return (
-      <Viz data={data} indicatorMetaData={indicatorMetaData} suffix={suffix} />
+      <Viz
+        dashboard={data}
+        indicatorMetaData={indicatorMetaData}
+        suffix={suffix}
+      />
     );
   return;
 }

@@ -1,0 +1,184 @@
+[
+  {
+    "mainIndicatorId": 1,
+    "name": "Public Procurement",
+    "description": "Uncover the hidden patterns in public procurement. Our primary indicators reveal critical insights into procurement transparency. Explore contract modifications, instances where no call for tenders was published, non-open procedures, single bidding cases, tax haven connections, and beneficiary ownership transparency. These experience-based indicators provide actionable intelligence for reformers.",
+    "mainColor": "#20881cff",
+    "gradientColor": "#03682bff,#06c351ff",
+    "methodology": "Our public procurement integrity methodology uses a systemic approach to identify patterns (easy red flags) in public procurement that may be signs of corruption and other types of illicit behavior. We use a small number the five set of widely available indicators to identify integrity risks at key stages of the procurement process. \n\n \n\nRemember: high risk values may not necessarily be evidence of corruption and could be influenced by underlying market structures. Regardless of whether a risk is an indicator of actual corruption, monitoring atypical procurement practices can help to identify and address underlying inefficiencies in the procurement system. \n\n The numerical value of an integrity indicator represents the number of risky contracts as a percentage of all measurable contracts for a given country or market. For example, if 30 contracts in a cohort of 100 were awarded using non-open procedures, the indicator value will be 0.3. Countries are also assigned an indicator risk level based on its position relative to other countries (high, medium, or low). \n\nWithin a country, the contracts can be analyzed by product market, contract value, year and sub-national regions, where data is available. \n\nOther important variables such as the transparency, size and value of procurement can be measured using the data availability dashboards.  \n\n \n\nThe data was collected by the Government Transparency Institute (GTI) for UNDP\u2019s Global Initiative on Measuring Corruption,  from the publicly available data of national government procurement systems, then processed to create standardized, comparable datasets that enable analysis across countries and time. \n \nThe full methodology can be downloaded from the resources section of this website. ",
+    "suffix": "%",
+    "comingSoon": false,
+    "maxValue": 100,
+    "subIndicators": [
+      {
+        "subIndicatorId": 4,
+        "mainIndicatorId": 1,
+        "code": "corr_nonopenproc",
+        "name": "Non-open procedures",
+        "description": "% of contracts that were not awarded through an open, competitive procurement method",
+        "color": "#a01616ff",
+        "colors": "#f08abeff, #f240c8ff, #e40cc7ff"
+      },
+      {
+        "subIndicatorId": 3,
+        "mainIndicatorId": 1,
+        "code": "corr_nocft",
+        "name": "No call for tenders published",
+        "description": "% of contracting opportunities that were not advertised publicly",
+        "color": "#9f1d7fff",
+        "colors": "#8a96f0ff, #4058f2ff, #0c71e4ff"
+      },
+      {
+        "subIndicatorId": 2,
+        "mainIndicatorId": 1,
+        "code": "corr_singleb",
+        "name": "Single Bidding",
+        "description": "% of all tenders that had one bid submitted",
+        "color": "#31c429ff",
+        "colors": "#ebf08aff, #f2da40ff, #e4ce0cff"
+      },
+      {
+        "subIndicatorId": 6,
+        "mainIndicatorId": 1,
+        "code": "corr_tax_haven",
+        "name": "Tax haven",
+        "description": "% of contracts awarded to companies registered in tax havens",
+        "color": "#1d2eb4ff",
+        "colors": "#8af08fff, #67f240ff, #3ee40cff"
+      },
+      {
+        "subIndicatorId": 5,
+        "mainIndicatorId": 1,
+        "code": "corr_contractmod",
+        "name": "Contract modification",
+        "description": "% of contracts that were changed at least once after being signed",
+        "color": "#d18029ff",
+        "colors": "#8af0f0ff, #40f2e9ff, #0ce4ceff"
+      }
+    ]
+  },
+  {
+    "mainIndicatorId": 2,
+    "name": "World Bank's Enterprise Survey",
+    "description": "What do businesses really experience on the ground? Go beyond perception to understand real encounters with corruption. Our indicators capture the incidence of corrupt practices, document specific practices businesses encounter, and reveal counter measures organizations implement. This ground-truth data empowers evidence-based strategies.",
+    "mainColor": "#f49764ff",
+    "gradientColor": "#f49764ff,#f9d6c4ff",
+    "methodology": "The World Bank Enterprise Surveys (WBES) provide firm-level data on the business environment and its interaction with enterprise performance. They are implemented by the World Bank, usually through local partners, following a harmonised global methodology that ensures results are comparable across countries and over time.\nThe surveys cover the formal private sector only, excluding the informal economy, agriculture, extractive industries, and public sector organisations including also public enterprises. The target population consists of registered business establishments with at least five employees. Samples are drawn through stratified random selection, with strata defined by firm size, main activity, and region. The respondent for the WBES is a top-level decision maker (owner, director, etc.) of the establishment sampled. \nThe WBES questionnaire is standardised across all participating countries and consists mainly of factual items answered by the owner or top manager of the business establishment. It covers more than a dozen thematic areas\u2014such as access to finance, infrastructure, trade, regulation, innovation, and labour practices\u2014also including questions on corruption. Around ninety percent of questions are factual, while a small subset captures perceptions. Interviews are conducted face-to-face, most recently through computer-assisted personal interviewing (CAPI). Corruption-related questions of the WBES clarify bribery pressure as experienced by sampled business establishments in various contexts (taxation, procurement, permits/licences and access to utility services), and include an assessment of how much of a burden is corruption in the particular economy for the business establishment interviewed.  \nData is collected through in-person interviewing, implementing rigorous controls through extensive field supervision, back-checks, and internal validation by the World Bank team. \nAll microdata, questionnaires, and methodological notes are publicly available at https://www.enterprisesurveys.org",
+    "suffix": "%",
+    "comingSoon": false,
+    "maxValue": 100,
+    "subIndicators": [
+      {
+        "subIndicatorId": 8,
+        "mainIndicatorId": 2,
+        "code": "CORR1",
+        "name": "Bribe expected by tax officials",
+        "description": "Percent of firms expected to give gifts in meetings with tax officials",
+        "color": "#e31f1fff",
+        "colors": "#f08a8aff, #f24040ff, #e40c0cff"
+      },
+      {
+        "subIndicatorId": 14,
+        "mainIndicatorId": 2,
+        "code": "CORR8",
+        "name": "Bribe expected for construction permit",
+        "description": "Percent of firms expected to give gifts to get a construction permit",
+        "color": "#fed05cff",
+        "colors": "#c4f08aff, #99f240ff, #8ae40cff"
+      },
+      {
+        "subIndicatorId": 12,
+        "mainIndicatorId": 2,
+        "code": "CORR6",
+        "name": "Bribe expected for electric connection",
+        "description": "Percent of firms expected to give gifts to get an electrical connection",
+        "color": "#10c4daff",
+        "colors": "#8a8af0ff, #4043f2ff, #0c22e4ff"
+      },
+      {
+        "subIndicatorId": 15,
+        "mainIndicatorId": 2,
+        "code": "CORR9",
+        "name": "Bribe expected for import licence",
+        "description": "Percent of firms expected to give gifts to get an import license",
+        "color": "#acba8dff",
+        "colors": "#f0b68aff, #f27e40ff, #e45b0cff"
+      },
+      {
+        "subIndicatorId": 9,
+        "mainIndicatorId": 2,
+        "code": "CORR10",
+        "name": "Bribe expected for operating licence",
+        "description": "Percent of firms expected to give gifts to get an operating license",
+        "color": "#23cb8dff",
+        "colors": "#8af0e4ff, #40f2e0ff, #0ce4cbff"
+      },
+      {
+        "subIndicatorId": 13,
+        "mainIndicatorId": 2,
+        "code": "CORR7",
+        "name": "Bribe expected for water connection",
+        "description": "Percent of firms expected to give gifts to get a water connection",
+        "color": "#cbf8d4ff",
+        "colors": "#f08ad6ff, #f240bcff, #e40caeff"
+      },
+      {
+        "subIndicatorId": 7,
+        "mainIndicatorId": 2,
+        "code": "CORR2",
+        "name": "Bribe paid to secure gov't contracts",
+        "description": "Percent of firms expected to give gifts to secure government contract",
+        "color": "#19d976ff",
+        "colors": "#f0e08aff, #f2e340ff, #e4ce0cff"
+      },
+      {
+        "subIndicatorId": 16,
+        "mainIndicatorId": 2,
+        "code": "GRAFT2",
+        "name": "Bribery depth",
+        "description": "Average bribery depth (% of public transactions where a gift or informal payment was requested)",
+        "color": "#afc2c0ff",
+        "colors": "#aa8af0ff, #7040f2ff, #5b0ce4ff"
+      },
+      {
+        "subIndicatorId": 17,
+        "mainIndicatorId": 2,
+        "code": "GRAFT3",
+        "name": "Bribery experience",
+        "description": "Bribery incidence (percent of firms experiencing at least one bribe payment request)",
+        "color": "#bd1fc5ff",
+        "colors": "#8ac2f0ff, #4096f2ff, #0c78e4ff"
+      },
+      {
+        "subIndicatorId": 10,
+        "mainIndicatorId": 2,
+        "code": "CORR11",
+        "name": "Corruption is major obstacle",
+        "description": "Percent of firms identifying corruption as a major or very severe constraint",
+        "color": "#4146cdff",
+        "colors": "#f08ab2ff, #f24096ff, #e40cc7ff"
+      },
+      {
+        "subIndicatorId": 11,
+        "mainIndicatorId": 2,
+        "code": "CORR4",
+        "name": "Estimated bribery prevalence",
+        "description": "Percent of firms expected to give gifts to public officials \"to get things done\"",
+        "color": "#ee9090ff",
+        "colors": "#7ff0e3ff, #40f2d4ff, #0ce49fff"
+      }
+    ]
+  },
+  {
+    "mainIndicatorId": 4,
+    "name": "Anti Corruption Authorities",
+    "description": "Coming soon",
+    "mainColor": "#ffffff",
+    "gradientColor": "#ffffff,#ffffff",
+    "methodology": "Coming soon",
+    "suffix": null,
+    "comingSoon": true,
+    "maxValue": 1,
+    "subIndicators": []
+  }
+]

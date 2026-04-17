@@ -39,9 +39,9 @@ const GlobeControls = (props: Props) => {
   return (
     <div
       ref={ref}
-      className={`h-[calc(100vh-120px)] ${isLastSection ? 'mb-60' : ''} `}
+      className={`py-8 lg:py-0 lg:h-[calc(100vh-120px)] ${isLastSection ? 'lg:mb-60' : ''} `}
     >
-      <div className='h-full max-w-[720px] m-auto flex-col gap-10 justify-center flex'>
+      <div className='h-full max-w-[720px] m-auto flex-col gap-6 lg:gap-10 justify-center flex px-4 lg:px-0'>
         <div className='flex-col gap-4.5 justify-center flex'>
           <HeadingText type='h2'>{heading}</HeadingText>
           <ParagraphText className='hidden md:block'>

@@ -1,9 +1,22 @@
+import {
+  API_BASE_URL,
+  FACTS_API_PAGE_SIZE,
+  logFactsPayloadSize,
+  logFactsLoadStart,
+  logFactsLoadEnd,
+} from '@/Constants';
+
 export const getCountryData = async (
   countryCode: string,
   mainIndicatorId: number,
 ) => {
+  const label = `getCountryData(${countryCode}, ${mainIndicatorId})`;
+  const loadStart = logFactsLoadStart(label);
   const response = await fetch(
-    `https://app.anti-corruption.org/api/Facts?countryCode=${countryCode}&regionId=null&mainIndicatorId=${mainIndicatorId}&pageSize=10000`,
+    `${API_BASE_URL}/Facts?countryCode=${countryCode}&regionId=null&mainIndicatorId=${mainIndicatorId}&pageSize=${FACTS_API_PAGE_SIZE}`,
   );
-  return response.json();
+  const data = await response.json();
+  logFactsPayloadSize(label, data);
+  logFactsLoadEnd(label, loadStart);
+  return data;
 };

@@ -37,17 +37,17 @@ function CountryPageEl({
     );
   }
   return (
-    <div className='flex flex-col container mx-auto'>
-      <div className='flex items-center justify-center gap-1 flex-col mt-16 mb-0'>
+    <div className='flex flex-col container mx-auto px-4 lg:px-0'>
+      <div className='flex items-center justify-center gap-1 flex-col mt-8 lg:mt-16 mb-0 w-full'>
         <img
           alt='Country flag'
           className='w-11 mb-2'
           src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/${countryInfo?.['Alpha-2 code']}.svg`}
         />
-        <HeadingText type='h1'>
+        <HeadingText type='h1' alignment='center' className='break-words max-w-full px-2 lg:px-0'>
           {countryInfo['Country or Area (official name)']}
         </HeadingText>
-        <ParagraphText size='sm'>
+        <ParagraphText size='sm' alignment='center' className='w-full px-2 lg:px-0 mt-1'>
           {countryInfo?.['Group 1']} | {countryInfo?.['Group 2']}
         </ParagraphText>
         <Spacer size='2xl' />
@@ -86,7 +86,7 @@ function CountryPageEl({
             <Spacer size='2xl' />
             <div className='flex flex-wrap gap-4'>
               {selectedIndicator !== 'country-profile' && (
-                <div className='w-[calc(33.33%-0.67rem)] grow-1 min-w-[320px]'>
+                <div className='w-full lg:w-[calc(33.33%-0.67rem)] grow-1 min-w-0 lg:min-w-[320px]'>
                   <Link
                     to='/countries/$isoCode/{-$indicator}'
                     params={{
@@ -94,7 +94,7 @@ function CountryPageEl({
                       indicator: 'country-profile',
                     }}
                   >
-                    <Card className='pr-16 pl-6 py-8 cursor-pointer'>
+                    <Card className='pr-4 lg:pr-16 pl-4 lg:pl-6 py-6 lg:py-8 cursor-pointer'>
                       <HeadingText type='h3'>Country profile</HeadingText>
                       <Spacer size='2xl' />
                       <ParagraphText weight='semibold'>
@@ -113,7 +113,7 @@ function CountryPageEl({
                 .map((d, i) => (
                   <div
                     key={i}
-                    className='w-[calc(33.33%-0.67rem)] grow-1 min-w-[320px]'
+                    className='w-full lg:w-[calc(33.33%-0.67rem)] grow-1 min-w-0 lg:min-w-[320px]'
                   >
                     <Link
                       to='/countries/$isoCode/{-$indicator}'
@@ -122,7 +122,7 @@ function CountryPageEl({
                         indicator: d.name.replaceAll(' ', '-').toLowerCase(),
                       }}
                     >
-                      <Card className='pr-16 pl-6 py-8 cursor-pointer'>
+                      <Card className='pr-4 lg:pr-16 pl-4 lg:pl-6 py-6 lg:py-8 cursor-pointer'>
                         <HeadingText type='h3'>{d.name}</HeadingText>
                         <Spacer size='2xl' />
                         <ParagraphText weight='semibold'>

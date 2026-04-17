@@ -4,7 +4,7 @@ import { HeadingText, ParagraphText } from '@/Components/Typography';
 
 function AboutUsPage() {
   return (
-    <div className='relative container mx-auto'>
+    <div className='relative container mx-auto px-4 lg:px-0'>
       <Spacer size='7xl' />
       <HeadingText type='h2'>
         About the Global Corruption Measurement Digital Dashboard
@@ -28,8 +28,8 @@ function AboutUsPage() {
         About the Global Initiative on Corruption Measurement
       </HeadingText>
       <Spacer size='xl' />
-      <div className='flex gap-10 items-center flex-wrap'>
-        <div className='w-full md:w-[calc(60%-20px)] shrink-0'>
+      <div className='flex gap-6 lg:gap-10 items-center flex-wrap'>
+        <div className='w-full lg:w-[calc(60%-20px)] shrink-0'>
           <ParagraphText>
             The Global Initiative for Measuring Corruption is part of UNDP’s
             Global Anti-Corruption Programme, which serves as the organization’s
@@ -71,7 +71,7 @@ function AboutUsPage() {
             .
           </ParagraphText>
         </div>
-        <div className='w-full md:w-[calc(40%-20px)]'>
+        <div className='w-full lg:w-[calc(40%-20px)]'>
           <img
             src='/imgs/GlobalInitiativeLogo.png'
             alt='Logo'

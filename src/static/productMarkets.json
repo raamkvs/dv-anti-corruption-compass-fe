@@ -1,0 +1,242 @@
+[
+  {
+    "productMarketId": 18,
+    "mainIndicatorId": 1,
+    "name": "Agri products",
+    "description": null
+  },
+  {
+    "productMarketId": 32,
+    "mainIndicatorId": 1,
+    "name": "Agri. services",
+    "description": null
+  },
+  {
+    "productMarketId": 13,
+    "mainIndicatorId": 1,
+    "name": "Arch. & engr.",
+    "description": null
+  },
+  {
+    "productMarketId": 8,
+    "mainIndicatorId": 1,
+    "name": "Business srv.",
+    "description": null
+  },
+  {
+    "productMarketId": 16,
+    "mainIndicatorId": 1,
+    "name": "Clothing",
+    "description": null
+  },
+  {
+    "productMarketId": 28,
+    "mainIndicatorId": 1,
+    "name": "Comms equip.",
+    "description": null
+  },
+  {
+    "productMarketId": 12,
+    "mainIndicatorId": 1,
+    "name": "Community srv.",
+    "description": null
+  },
+  {
+    "productMarketId": 39,
+    "mainIndicatorId": 1,
+    "name": "Constr. machinery",
+    "description": null
+  },
+  {
+    "productMarketId": 6,
+    "mainIndicatorId": 1,
+    "name": "Constr. materials",
+    "description": null
+  },
+  {
+    "productMarketId": 3,
+    "mainIndicatorId": 1,
+    "name": "Constr. work",
+    "description": "Construction Works"
+  },
+  {
+    "productMarketId": 30,
+    "mainIndicatorId": 1,
+    "name": "Education",
+    "description": null
+  },
+  {
+    "productMarketId": 9,
+    "mainIndicatorId": 1,
+    "name": "Electrical eq.",
+    "description": null
+  },
+  {
+    "productMarketId": 5,
+    "mainIndicatorId": 1,
+    "name": "Energy",
+    "description": null
+  },
+  {
+    "productMarketId": 20,
+    "mainIndicatorId": 1,
+    "name": "Enviro srv.",
+    "description": null
+  },
+  {
+    "productMarketId": 26,
+    "mainIndicatorId": 1,
+    "name": "Finance & ins.",
+    "description": null
+  },
+  {
+    "productMarketId": 31,
+    "mainIndicatorId": 1,
+    "name": "Food products",
+    "description": null
+  },
+  {
+    "productMarketId": 14,
+    "mainIndicatorId": 1,
+    "name": "Furniture",
+    "description": null
+  },
+  {
+    "productMarketId": 27,
+    "mainIndicatorId": 1,
+    "name": "Govt. services",
+    "description": null
+  },
+  {
+    "productMarketId": 15,
+    "mainIndicatorId": 1,
+    "name": "Healthcare",
+    "description": null
+  },
+  {
+    "productMarketId": 35,
+    "mainIndicatorId": 1,
+    "name": "Hospitality",
+    "description": null
+  },
+  {
+    "productMarketId": 17,
+    "mainIndicatorId": 1,
+    "name": "Ind. machinery",
+    "description": null
+  },
+  {
+    "productMarketId": 21,
+    "mainIndicatorId": 1,
+    "name": "IT services",
+    "description": null
+  },
+  {
+    "productMarketId": 42,
+    "mainIndicatorId": 1,
+    "name": "Lab equipment",
+    "description": null
+  },
+  {
+    "productMarketId": 4,
+    "mainIndicatorId": 1,
+    "name": "Medical equip.",
+    "description": null
+  },
+  {
+    "productMarketId": 7,
+    "mainIndicatorId": 1,
+    "name": "Office supplies",
+    "description": null
+  },
+  {
+    "productMarketId": 29,
+    "mainIndicatorId": 1,
+    "name": "Postal & telecom",
+    "description": null
+  },
+  {
+    "productMarketId": 34,
+    "mainIndicatorId": 1,
+    "name": "Printed matter",
+    "description": null
+  },
+  {
+    "productMarketId": 25,
+    "mainIndicatorId": 1,
+    "name": "R&D services",
+    "description": null
+  },
+  {
+    "productMarketId": 40,
+    "mainIndicatorId": 1,
+    "name": "Real estate",
+    "description": null
+  },
+  {
+    "productMarketId": 36,
+    "mainIndicatorId": 1,
+    "name": "Recreation",
+    "description": null
+  },
+  {
+    "productMarketId": 22,
+    "mainIndicatorId": 1,
+    "name": "Repair & maint.",
+    "description": null
+  },
+  {
+    "productMarketId": 11,
+    "mainIndicatorId": 1,
+    "name": "Security eq.",
+    "description": null
+  },
+  {
+    "productMarketId": 19,
+    "mainIndicatorId": 1,
+    "name": "Software",
+    "description": null
+  },
+  {
+    "productMarketId": 41,
+    "mainIndicatorId": 1,
+    "name": "Sports & games",
+    "description": null
+  },
+  {
+    "productMarketId": 38,
+    "mainIndicatorId": 1,
+    "name": "Textiles",
+    "description": null
+  },
+  {
+    "productMarketId": 10,
+    "mainIndicatorId": 1,
+    "name": "Transport eq.",
+    "description": null
+  },
+  {
+    "productMarketId": 33,
+    "mainIndicatorId": 1,
+    "name": "Transport srv.",
+    "description": null
+  },
+  {
+    "productMarketId": 37,
+    "mainIndicatorId": 1,
+    "name": "Travel srv.",
+    "description": null
+  },
+  {
+    "productMarketId": 23,
+    "mainIndicatorId": 1,
+    "name": "Utilities",
+    "description": null
+  },
+  {
+    "productMarketId": 24,
+    "mainIndicatorId": 1,
+    "name": "Water supply",
+    "description": null
+  }
+]

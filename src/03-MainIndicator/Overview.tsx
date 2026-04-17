@@ -10,7 +10,7 @@ interface Props {
 
 function CountryPageEl({ title, description, hideDownArrow }: Props) {
   return (
-    <div className='flex items-center justify-center gap-1 flex-col mt-16 mb-16'>
+    <div className='flex items-center justify-center gap-1 flex-col mt-8 lg:mt-16 mb-8 lg:mb-16'>
       <div className='flex flex-col gap-8 justify-center items-center container m-auto px-4'>
         <HeadingText type='h1'>{title}</HeadingText>
         <ParagraphText alignment='center' size='lg'>

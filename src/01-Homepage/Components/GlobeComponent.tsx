@@ -1,9 +1,17 @@
 import * as THREE from 'three';
+import { motion } from 'motion/react';
+import { Spinner } from '@undp/design-system-react/Spinner';
+import { getCountryDetailsFromISO3 } from '@undp-data/data-utils';
 import { ThreeDGlobe } from '@undp/data-viz/ThreeDGlobe';
 import { transformDataForGraph } from '@undp/data-viz/transformData';
 
-import { CountriesDataType, DataType, IndicatorsMetaDataType } from '@/Types';
+import { CountriesDataType, IndicatorsMetaDataType } from '@/Types';
 import { ParagraphText } from '@/Components/Typography';
+import { logTimelinePhase } from '@/logging/loadTimeLogger';
+
+const isDev =
+  typeof import.meta !== 'undefined' &&
+  (import.meta as unknown as { env?: { DEV?: boolean } }).env?.DEV === true;
 
 interface Props {
   globeData: {
@@ -11,7 +19,6 @@ interface Props {
     indicatorId: string;
     year: number;
   }[];
-  data: DataType[];
   selectedSubIndicator: string;
   countriesList: CountriesDataType[];
   rotate: boolean;
@@ -20,25 +27,67 @@ interface Props {
   inViewSlide: number;
   selectedId?: string;
   setSelectedId: (id: string) => void;
-  setSelectedYear: (year: number) => void;
+  globeLoading?: boolean;
 }
 
 function GlobeComponent({
   globeData,
-  data,
   selectedSubIndicator,
   rotate,
   indicatorsMetaData,
   selectedId,
   setSelectedId,
-  setSelectedYear,
   countriesList,
+  globeLoading = false,
 }: Props) {
+  logTimelinePhase('GlobeComponent render start');
+  const hasAnyGlobeData = globeData.length !== 0;
+  const filteredCount = globeData.filter(
+    d => d.indicatorId === selectedSubIndicator,
+  ).length;
+
+  if (isDev) {
+    console.warn('[ACC dev] GlobeComponent render', {
+      globeLoading,
+      rotate,
+      selectedSubIndicator,
+      selectedId,
+      globeDataTotal: globeData.length,
+      globeDataFiltered: filteredCount,
+      countriesListCount: countriesList?.length ?? 0,
+    });
+  }
+
   return (
     <>
-      <div className='w-1/2 sticky top-[120px] h-[calc(100vh-120px)] flex flex-col py-24 pl-10 pr-30'>
+      <div className='w-1/2 sticky top-[120px] h-[calc(100vh-120px)] hidden lg:flex flex-col py-24 pl-10 pr-30'>
+        {globeLoading ? (
+          <div
+            className='relative z-20 flex w-full shrink-0 items-center gap-3 mb-3'
+            role='status'
+            aria-live='polite'
+            aria-label='Loading map data'
+          >
+            <div
+              className='relative min-h-2 flex-1 overflow-hidden rounded-full bg-white/25 shadow-[inset_0_1px_2px_rgba(0,0,0,0.15)]'
+              role='progressbar'
+              aria-busy='true'
+            >
+              <motion.div
+                className='absolute inset-y-0 left-0 w-2/5 rounded-full bg-[#61D4F8] shadow-[0_0_12px_rgba(97,212,248,0.75)]'
+                animate={{ x: ['-100%', '420%'] }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 1.15,
+                  ease: 'linear',
+                }}
+              />
+            </div>
+            <Spinner size='sm' className='shrink-0 text-[#61D4F8]' />
+          </div>
+        ) : null}
         <div className='w-full grow flex radialGradientMask'>
-          {data.length !== 0 ? (
+          {hasAnyGlobeData ? (
             <ThreeDGlobe
               showColorScale={false}
               polygonAltitude={0.005}
@@ -52,8 +101,14 @@ function GlobeComponent({
               ]}
               selectedId={selectedId}
               onSeriesMouseClick={d => {
+                if (isDev) {
+                  console.warn('[ACC dev] Globe click', {
+                    clickedId: d?.id,
+                    clickedYear: d?.data?.year,
+                    selectedSubIndicator,
+                  });
+                }
                 setSelectedId(d.id);
-                setSelectedYear(d.data.year);
               }}
               colorDomain={['Yes']}
               scale={
@@ -87,6 +142,22 @@ function GlobeComponent({
                 })
               }
               tooltip={d => {
+                const fromList = countriesList.find(
+                  c => c['Alpha-3 code'] === d.id,
+                );
+                const fromUtils = getCountryDetailsFromISO3(d.id);
+                const title =
+                  fromList?.['Country or Area (official name)'] ??
+                  fromUtils?.['Country or Area (official name)'];
+
+                if (isDev && !title) {
+                  console.warn('[ACC dev] Globe tooltip missing title', {
+                    hoveredId: d?.id,
+                    countriesListCount: countriesList?.length ?? 0,
+                    hasFromUtils: Boolean(fromUtils),
+                    fromUtilsSample: fromUtils ?? null,
+                  });
+                }
                 return (
                   <div>
                     <ParagraphText
@@ -94,11 +165,7 @@ function GlobeComponent({
                       weight='bold'
                       className='text-black'
                     >
-                      {
-                        countriesList.find(c => c['Alpha-3 code'] === d.id)?.[
-                          'Country or Area (official name)'
-                        ]
-                      }
+                      {title}
                     </ParagraphText>
                   </div>
                 );

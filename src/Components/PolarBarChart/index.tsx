@@ -7,6 +7,7 @@ import { HeadingText } from '../Typography';
 import { Graph } from './Graph';
 
 import { DataType, IndicatorsMetaDataType } from '@/Types';
+import { useIsMobileBreakpoint } from '@/Utils/useIsMobileBreakpoint';
 
 interface Props {
   data: DataType[];
@@ -23,9 +24,10 @@ export const PolarBarChart = ({
   maxValue = 100,
   year,
 }: Props) => {
+  const isMobile = useIsMobileBreakpoint();
   const [radius, setRadius] = useState(0);
-  const marginSide = 100;
-  const marginTop = 100;
+  const marginSide = isMobile ? 72 : 100;
+  const marginTop = isMobile ? 56 : 100;
   const graphDiv = useRef<HTMLDivElement>(null);
   const setRadiusEvent = useEffectEvent(() => {
     if (graphDiv.current) {
@@ -49,7 +51,10 @@ export const PolarBarChart = ({
         {year}
       </HeadingText>
       <Spacer size='4xl' />
-      <div className='bg-transparent container-sm' ref={graphDiv}>
+      <div
+        className={`bg-transparent ${isMobile ? 'w-full flex justify-end pr-2' : 'container-sm'}`}
+        ref={graphDiv}
+      >
         {radius > 0 && (
           <Graph
             data={data}
@@ -59,6 +64,7 @@ export const PolarBarChart = ({
             marginTop={marginTop}
             indicatorMetaData={indicatorMetaData}
             maxValue={maxValue}
+            isMobile={isMobile}
           />
         )}
         {radius === 0 && <Spinner size='lg' className='my-20 m-auto' />}

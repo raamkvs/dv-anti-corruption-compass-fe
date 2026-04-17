@@ -104,7 +104,7 @@ function GloballyAvailableData({ isoCode }: Props) {
       sdg16CountryData.length > 0 ? (
         <>
           <div className='flex gap-4 flex-wrap'>
-            <div className='w-[calc(50%-0.5rem)] border-1 border-[#4373904D] p-5 rounded-[8px]!'>
+            <div className='w-full lg:w-[calc(50%-0.5rem)] border-1 border-[#4373904D] p-4 lg:p-5 rounded-[8px]!'>
               <BulletChart
                 showValues={false}
                 maxBarThickness={64}
@@ -153,7 +153,7 @@ function GloballyAvailableData({ isoCode }: Props) {
                 }}
               />
             </div>
-            <div className='w-[calc(50%-0.5rem)] border-1 border-[#4373904D] p-4 rounded-[8px]!'>
+            <div className='w-full lg:w-[calc(50%-0.5rem)] border-1 border-[#4373904D] p-4 rounded-[8px]!'>
               <BulletChart
                 graphTitle={
                   <>
@@ -203,7 +203,7 @@ function GloballyAvailableData({ isoCode }: Props) {
               />
             </div>
             {iiagData.length > 0 && (
-              <div className='w-[calc(50%-0.5rem)] border-1 border-[#4373904D] p-5 rounded-[8px]!'>
+              <div className='w-full lg:w-[calc(50%-0.5rem)] border-1 border-[#4373904D] p-4 lg:p-5 rounded-[8px]!'>
                 <SimpleLineChart
                   showValues={false}
                   graphTitle={
@@ -257,7 +257,7 @@ function GloballyAvailableData({ isoCode }: Props) {
                 </ParagraphText>
                 <div className='w-full gap-6 gap-y-8 flex flex-wrap'>
                   {wgiData.map((componentData, i: number) => (
-                    <div className='w-[calc(50%-12px)]' key={i}>
+                    <div className='w-full lg:w-[calc(50%-12px)]' key={i}>
                       <SimpleLineChart
                         graphTitle={
                           <>
@@ -318,7 +318,7 @@ function GloballyAvailableData({ isoCode }: Props) {
                 </ParagraphText>
                 <div className='w-full gap-6 gap-y-8 flex flex-wrap'>
                   {sdg16CountryDataFormatted.map((componentData, i: number) => (
-                    <div className='w-[calc(50%-12px)]' key={i}>
+                    <div className='w-full lg:w-[calc(50%-12px)]' key={i}>
                       <SimpleLineChart
                         showValues={false}
                         lineColor='#437390'

@@ -8,6 +8,7 @@ import { ErrorState } from '@/Components/ErrorState';
 import { HeadingText, ParagraphText } from '@/Components/Typography';
 import { NoData } from '@/Components/NoData';
 import { getFATF } from '@/QueryFn/CountryProfileData/getFATF';
+import { useIsMobileBreakpoint } from '@/Utils/useIsMobileBreakpoint';
 
 interface Props {
   isoCode: string;
@@ -21,6 +22,7 @@ function useDataForCountry() {
 }
 
 function FATF({ isoCode }: Props) {
+  const isMobile = useIsMobileBreakpoint();
   const { data, isError, isLoading } = useDataForCountry();
   if (isLoading) return <Spinner size='lg' className='my-20 m-auto' />;
   if (isError)
@@ -41,60 +43,85 @@ function FATF({ isoCode }: Props) {
       </HeadingText>
       {countryData.length > 0 ? (
         <>
-          <div className='flex border-b-[#000] pb-2 border-b'>
-            <ParagraphText
-              weight='semibold'
-              size='sm'
-              marginBottom='none'
-              className='text-[var(--color-text-black)] w-[60%]'
-            >
-              Country
-            </ParagraphText>
-            <ParagraphText
-              weight='semibold'
-              size='sm'
-              marginBottom='none'
-              className='text-[var(--color-text-black)] w-[20%] pr-4'
-            >
-              FATF Status
-            </ParagraphText>
-            <ParagraphText
-              weight='semibold'
-              size='sm'
-              marginBottom='none'
-              className='text-[var(--color-text-black)] w-[20%]'
-            >
-              Updated
-            </ParagraphText>
-          </div>
-          {countryData.map((d: any, i: number) => (
-            <div className='flex border-b-[#0000004D] py-3 border-b' key={i}>
+          {!isMobile && (
+            <div className='flex border-b-[#000] pb-2 border-b'>
               <ParagraphText
-                weight='regular'
+                weight='semibold'
                 size='sm'
                 marginBottom='none'
-                className='text-[var(--color-text-black)] w-[60%] pr-4'
+                className='text-[var(--color-text-black)] w-[60%]'
               >
-                {d['Country']}
+                Country
               </ParagraphText>
               <ParagraphText
-                weight='regular'
+                weight='semibold'
+                size='sm'
+                marginBottom='none'
+                className='text-[var(--color-text-black)] w-[20%] pr-4'
+              >
+                FATF Status
+              </ParagraphText>
+              <ParagraphText
+                weight='semibold'
                 size='sm'
                 marginBottom='none'
                 className='text-[var(--color-text-black)] w-[20%]'
               >
-                {d['Classification (Black list, Grey list)']}
-              </ParagraphText>
-              <ParagraphText
-                weight='regular'
-                size='sm'
-                marginBottom='none'
-                className='text-[var(--color-text-black)] w-[20%]'
-              >
-                {d.Year}
+                Updated
               </ParagraphText>
             </div>
-          ))}
+          )}
+          {countryData.map((d: any, i: number) =>
+            isMobile ? (
+              <div className='py-3 border-b border-b-[#0000004D]' key={i}>
+                <ParagraphText
+                  weight='medium'
+                  size='sm'
+                  marginBottom='none'
+                  className='text-[var(--color-text-black)]'
+                >
+                  {d['Country']}
+                </ParagraphText>
+                <div className='flex items-center gap-2 mt-1'>
+                  <ParagraphText
+                    weight='regular'
+                    size='xs'
+                    marginBottom='none'
+                    className='text-[var(--color-text-black)] opacity-60'
+                  >
+                    {d['Classification (Black list, Grey list)']} · {d.Year}
+                  </ParagraphText>
+                </div>
+              </div>
+            ) : (
+              <div className='flex border-b-[#0000004D] py-3 border-b' key={i}>
+                <ParagraphText
+                  weight='regular'
+                  size='sm'
+                  marginBottom='none'
+                  className='text-[var(--color-text-black)] w-[60%] pr-4'
+                >
+                  {d['Country']}
+                </ParagraphText>
+                <ParagraphText
+                  weight='regular'
+                  size='sm'
+                  marginBottom='none'
+                  className='text-[var(--color-text-black)] w-[20%]'
+                >
+                  {d['Classification (Black list, Grey list)']}
+                </ParagraphText>
+                <ParagraphText
+                  weight='regular'
+                  size='sm'
+                  marginBottom='none'
+                  className='text-[var(--color-text-black)] w-[20%]'
+                >
+                  {d.Year}
+                </ParagraphText>
+              </div>
+            ),
+          )}
         </>
       ) : (
         <div className='my-8'>

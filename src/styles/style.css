@@ -11,6 +11,8 @@
   --color-white-bg: #ffffff12;
   --color-text-black: #2d4858;
   --color-text-white: #fff;
+  --app-header-offset: 7.5rem;
+  --app-header-sticky-offset: 6.75rem;
 }
 
 body {
@@ -31,6 +33,7 @@ body {
 
 main {
   flex: 1;
+  padding-top: calc(var(--app-header-offset) + env(safe-area-inset-top));
 }
 
 .background-inherit,
@@ -66,4 +69,77 @@ main {
 .modal-overlay {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(25px);
+}
+
+.mobileApp .container {
+  max-width: 100%;
+  padding: 0 1.25rem;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --app-header-offset: 8.75rem;
+    --app-header-sticky-offset: 7.5rem;
+  }
+}
+
+/* ── WebGL print placeholder ────────────────────────────────────────────── */
+.webgl-print-placeholder {
+  display: contents;
+}
+
+.webgl-print-placeholder__fallback {
+  display: none;
+}
+
+/* ── Print styles ───────────────────────────────────────────────────────── */
+@media print {
+  /* Preserve the dark-theme colors exactly as rendered on screen */
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 1.5cm;
+  }
+
+  /* Hide global chrome */
+  header,
+  footer,
+  .print-hide {
+    display: none !important;
+  }
+
+  /* Remove top padding that compensates for the sticky header */
+  main {
+    padding-top: 0 !important;
+  }
+
+  /* Keep each card / graph on a single page where possible */
+  .card,
+  [class*='GraphCard'] {
+    break-inside: avoid;
+  }
+
+  /* WebGL placeholder: hide the interactive component, show static message */
+  .webgl-print-placeholder > *:not(.webgl-print-placeholder__fallback) {
+    display: none !important;
+  }
+
+  .webgl-print-placeholder__fallback {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-style: italic;
+  }
 }

@@ -1,33 +1,52 @@
 import { Spinner } from '@undp/design-system-react';
 import { useQuery } from '@tanstack/react-query';
+import { useMemo } from 'react';
 
 import Viz from './Viz';
 
-import { CountriesDataType, DataType, IndicatorsMetaDataType } from '@/Types';
-import { getCountryData } from '@/QueryFn/getCountryData';
+import { CountriesDataType, IndicatorsMetaDataType } from '@/Types';
 import { ErrorState } from '@/Components/ErrorState';
-import { getMarkets } from '@/QueryFn/getMarkets';
+import {
+  getCountryIndicatorDashboard,
+  CountryIndicatorDashboardResponse,
+} from '@/QueryFn/getCountryIndicatorDashboard';
 import { getRegionList } from '@/QueryFn/getRegionList';
+import staticDashboard2 from '@/static/cache/countryDashboard_2.json';
+import staticDashboard1 from '@/static/cache/countryDashboard_1.json';
+
+const dashboardCaches: Record<
+  number,
+  Record<string, CountryIndicatorDashboardResponse>
+> = {
+  1: staticDashboard1 as unknown as Record<
+    string,
+    CountryIndicatorDashboardResponse
+  >,
+  2: staticDashboard2 as unknown as Record<
+    string,
+    CountryIndicatorDashboardResponse
+  >,
+};
 
 function useDataForCountry(countryCode: string, mainIndicatorId: number) {
-  const countryData = useQuery({
-    queryKey: ['indicator-data', countryCode, mainIndicatorId],
-    queryFn: () => getCountryData(countryCode, mainIndicatorId),
-    select: data =>
-      data.map((d: DataType) => ({
-        ...d,
-        id: `${d.mainIndicatorId}_${d.subIndicatorId}`,
-      })),
+  const seeded = useMemo(() => {
+    const cache = dashboardCaches[mainIndicatorId];
+    return cache?.[countryCode] ?? undefined;
+  }, [countryCode, mainIndicatorId]);
+
+  const dashboard = useQuery({
+    queryKey: ['countryIndicatorDashboard', countryCode, mainIndicatorId],
+    queryFn: () => getCountryIndicatorDashboard(countryCode, mainIndicatorId),
+    initialData: seeded,
+    initialDataUpdatedAt: 0,
   });
-  const marketList = useQuery({
-    queryKey: ['marketList'],
-    queryFn: getMarkets,
-  });
+
   const regionList = useQuery({
     queryKey: ['regionList', countryCode],
     queryFn: () => getRegionList(countryCode),
   });
-  return { countryData, marketList, regionList };
+
+  return { dashboard, regionList };
 }
 
 interface Props {
@@ -37,15 +56,14 @@ interface Props {
 }
 
 function ProcurementViz({ countryInfo, indicatorMetaData, suffix }: Props) {
-  const { countryData, marketList, regionList } = useDataForCountry(
+  const { dashboard, regionList } = useDataForCountry(
     countryInfo['Alpha-3 code'],
     indicatorMetaData.mainIndicatorId,
   );
 
-  const isLoading =
-    marketList.isLoading || countryData.isLoading || regionList.isLoading;
-  const isError =
-    marketList.isError || countryData.isError || regionList.isError;
+  const isLoading = dashboard.isLoading || regionList.isLoading;
+  const isError = dashboard.isError || regionList.isError;
+
   if (isLoading)
     return (
       <div className='my-8'>
@@ -58,11 +76,10 @@ function ProcurementViz({ countryInfo, indicatorMetaData, suffix }: Props) {
         <ErrorState />
       </div>
     );
-  if (countryData.data && marketList.data && regionList.data)
+  if (dashboard.data && regionList.data)
     return (
       <Viz
-        data={countryData.data}
-        marketList={marketList.data}
+        dashboard={dashboard.data}
         regionList={regionList.data}
         indicatorMetaData={indicatorMetaData}
         suffix={suffix}

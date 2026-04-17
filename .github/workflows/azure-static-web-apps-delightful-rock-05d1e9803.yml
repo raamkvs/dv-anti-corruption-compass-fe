@@ -37,10 +37,10 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_DELIGHTFUL_ROCK_05D1E9803 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
-          action: "upload"
-          app_location: "dist"  # Point directly to build output
-          api_location: ""
-          output_location: "."  # Current directory since we're already in dist
+          action: 'upload'
+          app_location: 'dist' # Point directly to build output
+          api_location: ''
+          output_location: '.' # Current directory since we're already in dist
           skip_app_build: true
           ###### End of Repository/Build Configurations ######
 
@@ -54,6 +54,4 @@ jobs:
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_DELIGHTFUL_ROCK_05D1E9803 }}
-          action: "close"
-
-
+          action: 'close'

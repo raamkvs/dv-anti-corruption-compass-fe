@@ -1,6 +1,19 @@
+import {
+  API_BASE_URL,
+  FACTS_API_PAGE_SIZE,
+  logFactsPayloadSize,
+  logFactsLoadStart,
+  logFactsLoadEnd,
+} from '@/Constants';
+
 export const getAllCountriesAllData = async () => {
+  const label = 'getAllCountriesAllData (homepage)';
+  const loadStart = logFactsLoadStart(label);
   const response = await fetch(
-    'https://app.anti-corruption.org/api/Facts?regionId=null&&productMarketId=null&pageSize=10000',
+    `${API_BASE_URL}/Facts?regionId=null&productMarketId=null&pageSize=${FACTS_API_PAGE_SIZE}`,
   );
-  return response.json();
+  const data = await response.json();
+  logFactsPayloadSize(label, data);
+  logFactsLoadEnd(label, loadStart);
+  return data;
 };

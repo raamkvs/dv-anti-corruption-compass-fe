@@ -6,7 +6,7 @@ import EnterpriseSurveyMethodology from '@/Components/MethodologyBlocks/Enterpri
 
 function MethodologyPage() {
   return (
-    <div className='relative container mx-auto'>
+    <div className='relative container mx-auto px-4 lg:px-0'>
       <Spacer size='7xl' />
       <HeadingText type='h2'>Methodology</HeadingText>
       <Spacer size='4xl' />

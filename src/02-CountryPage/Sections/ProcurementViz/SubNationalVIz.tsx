@@ -94,7 +94,7 @@ function SubNationalVIz({
           d.regionId !== null && d.contractValue === contractValue,
       ).length > 0 ? (
         <div className='flex gap-4 flex-wrap items-stretch'>
-          <div className='basis-[calc(50%-0.5rem)] flex flex-col min-w-[320px]'>
+          <div className='basis-full lg:basis-[calc(50%-0.5rem)] flex flex-col min-w-0 lg:min-w-[320px]'>
             <ColorLegend
               size='sm'
               showTitle={false}
@@ -142,7 +142,7 @@ function SubNationalVIz({
               }
             />
           </div>
-          <div className='basis-[calc(50%-0.5rem)] flex flex-col min-w-[320px]'>
+          <div className='basis-full lg:basis-[calc(50%-0.5rem)] flex flex-col min-w-0 lg:min-w-[320px]'>
             <BarChartTable
               data={data
                 .filter(

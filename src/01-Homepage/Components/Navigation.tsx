@@ -19,7 +19,7 @@ const Navigation = (props: Props) => {
     indicatorsMetaData,
   } = props;
   return (
-    <div className='fixed z-20 flex flex-col gap-0 justify-center items-center right-8 top-[50%] transform-[translate(0, -50%)'>
+    <div className='fixed z-20 hidden lg:flex flex-col gap-0 justify-center items-center right-8 top-[50%] transform-[translate(0, -50%)'>
       {indicatorsMetaData.map((d, i) => (
         <Fragment key={i}>
           <div className='flex gap-2 items-center'>

@@ -19,7 +19,7 @@ export const Footer = ({
   indicatorsMetaDataLoading: boolean;
 }) => {
   return (
-    <footer className='bg-[#437390] px-16 py-24 relative z-10'>
+    <footer className='bg-[#437390] px-4 lg:px-16 py-12 lg:py-24 relative z-10'>
       <div className='flex flex-wrap flex-col lg:flex-row gap-4 md:gap-12 lg:gap-0'>
         <div className='w-full lg:w-1/3'>
           <ParagraphText size='sm'>
